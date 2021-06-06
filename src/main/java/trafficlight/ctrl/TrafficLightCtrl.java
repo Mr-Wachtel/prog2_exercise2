@@ -25,6 +25,8 @@ public class TrafficLightCtrl {
         gui = new TrafficLightGui(this);
         gui.setVisible(true);
         //TODO useful to update the current state
+
+        currentState.notifyObserver();
     }
 
     private void initStates() {
@@ -33,6 +35,8 @@ public class TrafficLightCtrl {
             public State getNextState() {
                 previousState = currentState;
                 //TODO useful to update the current state and the old one
+                currentState.notifyObserver();
+                yellowState.notifyObserver();
                 return yellowState;
             }
             @Override
@@ -46,6 +50,8 @@ public class TrafficLightCtrl {
             public State getNextState() {
                 previousState = currentState;
                 //TODO useful to update the current state and the old one
+                currentState.notifyObserver();
+                yellowState.notifyObserver();
                 return yellowState;
             }
             @Override
@@ -64,6 +70,8 @@ public class TrafficLightCtrl {
                 }else {
                     previousState = currentState;
                     //TODO useful to update the current state and the old one
+                    currentState.notifyObserver();
+                    redState.notifyObserver();
                     return greenState;
                 }
             }
